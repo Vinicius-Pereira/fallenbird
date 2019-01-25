@@ -31,23 +31,28 @@ public class CameraMovement : MonoBehaviour {
     }
 
 	void Update () {
+        //Verifica se a animação de pulo inicial já chegou em seu zênite
         finishedInitialJump = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("TopInitialJump") ? true : false;
+        //Caso tenha chego e o tempo de zênite esteja zerado, inicia animação de queda 
         if (timeInitialJump <= 0 && !GetComponent<Animator>().GetBool("startFall"))
         {
             GetComponent<Animator>().SetBool("startFall", true);
             timeInitialJump = originalTimeInitialJump;
         }
+        //Caso tenha chego e o tempo não esteja concluído ainda, reduz o tempo
         else if (finishedInitialJump)
         {
             timeInitialJump -= Time.deltaTime;
         }
-
+        //Verifica se a animação de pulo padrão já chegou em seu zênite
         finishedJump = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("TopJump") ? true : false;
+        //Caso tenha chego e o tempo de zênite esteja zerado, inicia animação de queda
         if (timeJump <= 0 && !GetComponent<Animator>().GetBool("startFall"))
         {
             GetComponent<Animator>().SetBool("startFall", true);
             timeJump = originalTimeJump;
         }
+        //Caso tenha chego e o tempo não esteja concluído ainda, reduz o tempo
         else if (finishedJump)
         {
             timeJump -= Time.deltaTime;
@@ -55,22 +60,27 @@ public class CameraMovement : MonoBehaviour {
 
     }
 
+    //Ativa animação de pulo padrão
     public void ActiveJumpMovement()
     {
         if(!GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("FallInitialJump"))
         {
+            //Contador de pulos multiplos
             var count = GetComponent<Animator>().GetInteger("jumpCount");
             GetComponent<Animator>().SetInteger("jumpCount", ++count);
+            //Ativa animação de pulo
             GetComponent<Animator>().SetBool("jump", true);
         }
     }
 
+    //Reseta variáveis de animação
     public void ResetMovements()
     {
         GetComponent<Animator>().SetBool("jump", false);
         GetComponent<Animator>().SetBool("startFall", false);
     }
 
+    //Reduz a quantidade de pulos por ciclo de animação
     public void DecreaseJump()
     {
         var count = GetComponent<Animator>().GetInteger("jumpCount");

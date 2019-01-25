@@ -6,7 +6,7 @@ public class Player : MonoBehaviour {
 
     const string ACCELEROMETER = "Accelerometer";
     const string TOUCH = "Touch";
-    
+    //Velocidade de movimento para as laterais do player
     [Range(1, 10)]
     public float movementVelocity = 10.0f;
     
@@ -17,17 +17,20 @@ public class Player : MonoBehaviour {
     private bool touching = false;
 
 	void Start () {
+        //Define centro da tela para uso do touch screen
         screenCenterX = Screen.width * 0.5f;
 	}
 
     private void FixedUpdate()
     {
+        //Controle por acelerômetro (revisar)
         if(controlMode == ACCELEROMETER)
         {
             //refazer
             Vector3 acc = Input.acceleration;
             GetComponent<Rigidbody2D>().AddForce(new Vector3(acc.x * movementVelocity, 0, 0), ForceMode2D.Force);
         }
+        //Controle por touch screen
         else if(controlMode == TOUCH)
         {
             if(Input.touchCount > 0)
@@ -60,6 +63,7 @@ public class Player : MonoBehaviour {
             }
 
         }
+        //Controle pelas setas do teclado (PC para teste)
         else
         {
             if (Input.GetKey(KeyCode.RightArrow))
@@ -73,6 +77,7 @@ public class Player : MonoBehaviour {
         }
     }
 
+    //Define modo de controle
     public void setControlMode()
     {
         controlMode = PlayerPrefs.GetString("Control");

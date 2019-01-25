@@ -9,9 +9,11 @@ public class ChooseControl : MonoBehaviour {
 
     public void Awake()
     {
+        //Pausa o jogo
         PauseGame();
     }
 
+    //Define o tipo de controle
     public void SwitchControl(int control)
     {
         if(control == 0)
@@ -28,12 +30,12 @@ public class ChooseControl : MonoBehaviour {
         }
         ContinueGame();
     }
-
+    //Pausa o jogo
     private void PauseGame()
     {
         Time.timeScale = 0;
     }
-
+    //Reinicia o jogo e informa o modo de controle do player
     private void ContinueGame()
     {
         Time.timeScale = 1;
