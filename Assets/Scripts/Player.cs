@@ -13,6 +13,11 @@ public class Player : MonoBehaviour {
     [Range(1, 10)]
     public float movementVelocity = 10.0f;
 
+    [Range(1, 10)]
+    public float bounceVelocity = 1.0f;
+
+    public Animator backgroundJump;
+
     public GameObject gameOver;
 
     private string controlMode;
@@ -24,19 +29,15 @@ public class Player : MonoBehaviour {
         GetComponent<Rigidbody2D>().velocity = Vector2.up * jumpVelocity;
 	}
 
-    private void Update()
-    {
-        Debug.Log(GetComponent<Rigidbody2D>().velocity.y);
-    }
-
     private void FixedUpdate()
     {
         if(controlMode == ACCELEROMETER)
         {
+            //refazer
             Vector3 acc = Input.acceleration;
             GetComponent<Rigidbody2D>().AddForce(new Vector3(acc.x * movementVelocity, 0, 0), ForceMode2D.Force);
         }
-        else
+        else if(controlMode == TOUCH)
         {
             if(Input.touchCount > 0)
             {
@@ -59,16 +60,25 @@ public class Player : MonoBehaviour {
                     if(touch.position.x > screenCenterX)
                     {
                         transform.Translate(Vector3.right * movementVelocity * Time.deltaTime);
-                        //GetComponent<Rigidbody2D>().AddForce(new Vector3(movementVelocity * Time.deltaTime, 0, 0), ForceMode2D.Force);  
                     }
                     else if(touch.position.x < screenCenterX)
                     {
                         transform.Translate(Vector3.left * movementVelocity * Time.deltaTime);
-                        //GetComponent<Rigidbody2D>().AddForce(new Vector3(movementVelocity * Time.deltaTime * -1, 0, 0), ForceMode2D.Force);
                     }
                 }
             }
-            
+
+        }
+        else
+        {
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                transform.Translate(Vector3.right * movementVelocity * Time.deltaTime);
+            }
+            else if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                transform.Translate(Vector3.left * movementVelocity * Time.deltaTime);
+            }
         }
     }
 
@@ -80,7 +90,16 @@ public class Player : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("dead"))
+        if(collision.CompareTag("jumper"))
+        {
+            Debug.Log(GetComponent<Rigidbody2D>().velocity.y);
+            GetComponent<Rigidbody2D>().velocity = Vector2.up * bounceVelocity;
+            Destroy(collision.gameObject);
+
+            Debug.Log("Bounce: " + GetComponent<Rigidbody2D>().velocity.y);
+        }
+
+        if (collision.CompareTag("dead"))
         {
             Time.timeScale = 0;
             gameOver.SetActive(true);

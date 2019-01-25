@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4674461541592578}
   - component: {fileID: 212048610720538434}
   - component: {fileID: 50269570172649350}
-  - component: {fileID: 114492343307771412}
   - component: {fileID: 58199049122936258}
   - component: {fileID: 251619291308518792}
   - component: {fileID: 114338527837511404}
@@ -39,8 +38,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1062112351842454}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.3131952, y: 5.312242, z: 0}
-  m_LocalScale: {x: 3.2196434, y: 3.2196434, z: 3.2196434}
+  m_LocalPosition: {x: 2.3, y: 10.93, z: 0}
+  m_LocalScale: {x: 3.21964, y: 3.21964, z: 3.21964}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -56,10 +55,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.5
+  m_Mass: 100
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.05
+  m_GravityScale: 0.1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -91,19 +90,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38c65f08f03a98d488635218d217bfde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
---- !u!114 &114492343307771412
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1062112351842454}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75b285850ec5f4e4cac2192ecf829329, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bounceVelocity: 2
+  fallVelocity: 1
+  bounceVelocity: 2.16
 --- !u!212 &212048610720538434
 SpriteRenderer:
   m_ObjectHideFlags: 1

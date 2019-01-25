@@ -18,9 +18,13 @@ public class ChooseControl : MonoBehaviour {
         {
             PlayerPrefs.SetString("Control", "Touch");
         }
-        else
+        else if(control == 1)
         {
             PlayerPrefs.SetString("Control", "Accelerometer");
+        }
+        else
+        {
+            PlayerPrefs.SetString("Control", "Arrows");
         }
         ContinueGame();
     }
