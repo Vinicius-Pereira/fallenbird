@@ -57,8 +57,10 @@ public class CameraMovement : MonoBehaviour {
 
     public void ActiveJumpMovement()
     {
-        if(GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("IdleCamera"))
+        if(!GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("FallInitialJump"))
         {
+            var count = GetComponent<Animator>().GetInteger("jumpCount");
+            GetComponent<Animator>().SetInteger("jumpCount", ++count);
             GetComponent<Animator>().SetBool("jump", true);
         }
     }
@@ -67,6 +69,19 @@ public class CameraMovement : MonoBehaviour {
     {
         GetComponent<Animator>().SetBool("jump", false);
         GetComponent<Animator>().SetBool("startFall", false);
+    }
+
+    public void DecreaseJump()
+    {
+        var count = GetComponent<Animator>().GetInteger("jumpCount");
+        if(count <= 1)
+        {
+            GetComponent<Animator>().SetInteger("jumpCount", 0);
+        }
+        else
+        {
+            GetComponent<Animator>().SetInteger("jumpCount", --count);
+        }
     }
 
 }
