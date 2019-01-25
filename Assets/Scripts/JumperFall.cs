@@ -4,31 +4,21 @@ using UnityEngine;
 
 public class JumperFall : MonoBehaviour {
 
-    [Range(1,10)]
-    public float fallVelocity = 1.0f;
 
-    [Range(1, 10)]
-    public float bounceVelocity = 1.0f;
-
-    // Update is called once per frame
-    void FixedUpdate () {
+    private float fallVelocity;
+    
+    void FixedUpdate ()
+    {
+        fallVelocity = Camera.main.GetComponent<ScrollEndless>().scrollSpeed;
         transform.Translate(Vector2.down * fallVelocity * Time.deltaTime);
 	}
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        //if (other.CompareTag("Player"))
-        //{
-
-        //    GetComponent<Rigidbody2D>().velocity = Vector2.down * bounceVelocity;
-
-        //    Destroy(this.gameObject);
-
-        //}
-
-        if (other.CompareTag("dead"))
+        if(collision.CompareTag("Player"))
         {
-            Destroy(this.gameObject);
+            Camera.main.GetComponent<ScrollEndless>().ActiveJumperScrollSpeed();
+            Destroy(gameObject);
         }
     }
 }

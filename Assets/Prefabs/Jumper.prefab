@@ -22,11 +22,10 @@ GameObject:
   - component: {fileID: 212048610720538434}
   - component: {fileID: 50269570172649350}
   - component: {fileID: 58199049122936258}
-  - component: {fileID: 251619291308518792}
   - component: {fileID: 114338527837511404}
   m_Layer: 0
   m_Name: Jumper
-  m_TagString: jumper
+  m_TagString: items
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1062112351842454}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.3, y: 10.93, z: 0}
+  m_LocalPosition: {x: -0.02, y: 6.13, z: 0}
   m_LocalScale: {x: 3.21964, y: 3.21964, z: 3.21964}
   m_Children: []
   m_Father: {fileID: 0}
@@ -51,7 +50,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1062112351842454}
-  m_BodyType: 2
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -63,7 +62,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 5
+  m_Constraints: 6
 --- !u!58 &58199049122936258
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -74,7 +73,7 @@ CircleCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_UsedByEffector: 1
+  m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.0013263873, y: 0}
   serializedVersion: 2
@@ -90,8 +89,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38c65f08f03a98d488635218d217bfde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fallVelocity: 1
-  bounceVelocity: 2.16
 --- !u!212 &212048610720538434
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -136,21 +133,3 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
---- !u!251 &251619291308518792
-PlatformEffector2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1062112351842454}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RotationalOffset: 0
-  m_UseOneWay: 1
-  m_UseOneWayGrouping: 0
-  m_SurfaceArc: 151.2
-  m_UseSideFriction: 0
-  m_UseSideBounce: 0
-  m_SideArc: 1

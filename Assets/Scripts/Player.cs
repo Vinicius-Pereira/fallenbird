@@ -6,18 +6,10 @@ public class Player : MonoBehaviour {
 
     const string ACCELEROMETER = "Accelerometer";
     const string TOUCH = "Touch";
-
-    [Range(1,10)]
-    public float jumpVelocity = 10.0f;
-
+    
     [Range(1, 10)]
     public float movementVelocity = 10.0f;
-
-    [Range(1, 10)]
-    public float bounceVelocity = 1.0f;
-
-    public Animator backgroundJump;
-
+    
     public GameObject gameOver;
 
     private string controlMode;
@@ -26,7 +18,6 @@ public class Player : MonoBehaviour {
 
 	void Start () {
         screenCenterX = Screen.width * 0.5f;
-        GetComponent<Rigidbody2D>().velocity = Vector2.up * jumpVelocity;
 	}
 
     private void FixedUpdate()
@@ -88,21 +79,4 @@ public class Player : MonoBehaviour {
         Debug.Log(controlMode);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.CompareTag("jumper"))
-        {
-            Debug.Log(GetComponent<Rigidbody2D>().velocity.y);
-            GetComponent<Rigidbody2D>().velocity = Vector2.up * bounceVelocity;
-            Destroy(collision.gameObject);
-
-            Debug.Log("Bounce: " + GetComponent<Rigidbody2D>().velocity.y);
-        }
-
-        if (collision.CompareTag("dead"))
-        {
-            Time.timeScale = 0;
-            gameOver.SetActive(true);
-        }
-    }
 }

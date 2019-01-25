@@ -4,21 +4,41 @@ using UnityEngine;
 
 public class ScrollEndless : MonoBehaviour {
 
-    [Range(1, 10)]
-    public float initialVelocity = 1.0f;
+    [Range(0, 10)]
+    public float scrollSpeed = 0.0f;
+    [Range(0, 10)]
+    public float jumperScrollSpeed = 0.0f;
+    [Range(0, 10)]
+    public float timeJumperScrollSpeed = 0.0f;
 
-    [Range(1, 10)]
-    public float velocity = 1.0f;
+    private float originalScrollSpeed;
+    private float timeBoostVelocity;
 
-    public GameObject player;
-
-	// Use this for initialization
-	void Start () {
-        transform.Translate(Vector2.down * initialVelocity * Time.deltaTime);
+    private void Awake()
+    {
+        originalScrollSpeed = scrollSpeed;
+        timeBoostVelocity = timeJumperScrollSpeed;
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    private void Update()
+    {
+        if (scrollSpeed == jumperScrollSpeed)
+        {
+            timeBoostVelocity -= Time.deltaTime;
+            if (timeBoostVelocity <= 0)
+            {
+                scrollSpeed = originalScrollSpeed;
+                timeBoostVelocity = timeJumperScrollSpeed;
+            }
+        }
+    }
+
+    public void ActiveJumperScrollSpeed()
+    {
+        scrollSpeed = jumperScrollSpeed;
+        timeBoostVelocity = timeJumperScrollSpeed;
+        GetComponent<CameraMovement>().ActiveJumpMovement();
+    }
+
+
 }
