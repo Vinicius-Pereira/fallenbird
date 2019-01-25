@@ -78,5 +78,4 @@ public class Player : MonoBehaviour {
         controlMode = PlayerPrefs.GetString("Control");
         Debug.Log(controlMode);
     }
-
 }

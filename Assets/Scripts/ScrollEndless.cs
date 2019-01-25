@@ -11,6 +11,8 @@ public class ScrollEndless : MonoBehaviour {
     [Range(0, 10)]
     public float timeJumperScrollSpeed = 0.0f;
 
+    public GameObject player;
+
     private float originalScrollSpeed;
     private float timeBoostVelocity;
 
