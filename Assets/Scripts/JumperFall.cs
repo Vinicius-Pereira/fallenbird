@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class JumperFall : MonoBehaviour {
 
-    //Velocdaide de queda (scroll) do jumper
+    //Velocidade de queda (scroll) do jumper
     private float fallVelocity;
+    [Range(0, 1000)]
+    public float energy;
     
     void FixedUpdate ()
     {
@@ -20,6 +22,8 @@ public class JumperFall : MonoBehaviour {
         //Quando colide com o player ativa ações do jumper e desetrói a si memso
         if(collision.CompareTag("Player"))
         {
+            Debug.Log(energy);
+            collision.GetComponent<Player>().increaseEnergy(energy);
             Camera.main.GetComponent<ScrollEndless>().ActiveJumperScrollSpeed();
             Destroy(gameObject);
         }

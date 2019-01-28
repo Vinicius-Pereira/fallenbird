@@ -6,6 +6,7 @@ public class CameraMovement : MonoBehaviour {
 
     [Range(0,10)]
     public float timeInitialJump = 0.0f;
+    public Player player;
 
     private float originalTimeInitialJump;
 
@@ -31,6 +32,12 @@ public class CameraMovement : MonoBehaviour {
     }
 
 	void Update () {
+
+        if(player.soulEnergy <= 0)
+        {
+            GameOverMovement();
+        }
+
         //Verifica se a animação de pulo inicial já chegou em seu zênite
         finishedInitialJump = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("TopInitialJump") ? true : false;
         //Caso tenha chego e o tempo de zênite esteja zerado, inicia animação de queda 
@@ -92,6 +99,11 @@ public class CameraMovement : MonoBehaviour {
         {
             GetComponent<Animator>().SetInteger("jumpCount", --count);
         }
+    }
+
+    public void GameOverMovement()
+    {
+        GetComponent<Animator>().SetBool("gameOver", true);
     }
 
 }

@@ -9,8 +9,12 @@ public class Player : MonoBehaviour {
     //Velocidade de movimento para as laterais do player
     [Range(1, 10)]
     public float movementVelocity = 10.0f;
-    
-    public GameObject gameOver;
+
+    [Range(0,1000)]
+    public float soulEnergy = 1000.0f;
+    [Range(0, 1000)]
+    public float lostEnergy = 100.0f;
+    public GameObject energyBar;
 
     private string controlMode;
     private float screenCenterX;
@@ -19,6 +23,8 @@ public class Player : MonoBehaviour {
 	void Start () {
         //Define centro da tela para uso do touch screen
         screenCenterX = Screen.width * 0.5f;
+
+        InvokeRepeating("decreaseEnergy", 1.0f, 1.0f);
 	}
 
     private void FixedUpdate()
@@ -82,5 +88,29 @@ public class Player : MonoBehaviour {
     {
         controlMode = PlayerPrefs.GetString("Control");
         Debug.Log(controlMode);
+    }
+
+    private void decreaseEnergy()
+    {
+        if(soulEnergy <= lostEnergy)
+        {
+            soulEnergy = 0;
+        }
+        else
+        {
+            soulEnergy -= lostEnergy;
+        }
+    }
+
+    public void increaseEnergy(float energy)
+    {
+        if(soulEnergy + energy >= 1000)
+        {
+            soulEnergy = 1000;
+        }
+        else
+        {
+            soulEnergy += energy;
+        }
     }
 }
